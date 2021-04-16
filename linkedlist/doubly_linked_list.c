@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>>
-
+//test
 typedef int element;
 typedef struct DListNode
 { //이중 연결 노드 타입
