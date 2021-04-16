@@ -1,0 +1,7 @@
+﻿stack2.obj : error LNK2005: "void __cdecl init_stack(struct StackType *)" (?init_stack@@YAXPAUStackType@@@Z)이(가) stack.obj에 이미 정의되어 있습니다.
+stack2.obj : error LNK2005: "int __cdecl is_empty(struct StackType *)" (?is_empty@@YAHPAUStackType@@@Z)이(가) stack.obj에 이미 정의되어 있습니다.
+stack2.obj : error LNK2005: "int __cdecl is_full(struct StackType *)" (?is_full@@YAHPAUStackType@@@Z)이(가) stack.obj에 이미 정의되어 있습니다.
+stack2.obj : error LNK2005: "int __cdecl pop(struct StackType *)" (?pop@@YAHPAUStackType@@@Z)이(가) stack.obj에 이미 정의되어 있습니다.
+stack2.obj : error LNK2005: "void __cdecl push(struct StackType *,int)" (?push@@YAXPAUStackType@@H@Z)이(가) stack.obj에 이미 정의되어 있습니다.
+stack2.obj : error LNK2005: _main이(가) stack.obj에 이미 정의되어 있습니다.
+C:\Users\SAMSUNG\OneDrive\바탕 화면\C\Stack\Debug\Stack.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.
