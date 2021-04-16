@@ -9,8 +9,9 @@ typedef struct DListNode
     struct DListNode *rlink;
 } DListNode
 
-//이중 연결 리스트 초기화
-void init(DListNode *phead)
+    //이중 연결 리스트 초기화
+    void
+    init(DListNode *phead)
 {
     phead->llink = phead;
     phead->rlink = phead;
