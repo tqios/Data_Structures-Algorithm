@@ -5,8 +5,8 @@
 int top = -1;
 int stack[1000001];
 
-void push(int i) {
-	stack[++top] = i;
+void push(int item) {
+	stack[++top] = item;
 }
 
 int pop() {

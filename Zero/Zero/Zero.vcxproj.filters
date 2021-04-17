@@ -18,5 +18,8 @@
     <ClCompile Include="zero.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="zero_other.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
