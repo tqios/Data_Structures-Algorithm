@@ -50,21 +50,23 @@ int main(void) {
 	for (int i = 0; i < num; i++) {
 		char pro[10];
 		printf("명력을 입력하세요\n");
-		scanf("%s",pro);
+		gets_s(pro);
+		char *ptr = strtok(pro, " ");
+		printf("%s", ptr);
+		
 
-		if (!strcmp(pro,"push")) {
-			int pushnum;
-			printf("저장할 숫자를 입력하세요\n");
-			scanf("%d", &pushnum);
-			push(&s, pushnum);
+		if (!strcmp(ptr,"push")) {
+			char *cnum = strtok(NULL, " ");
+			int num = (int)cnum;
+			push(&s, num);
 		}
-		if (!strcmp(pro, "pop")) {
+		if (!strcmp(ptr, "pop")) {
 			printf("%d\n", pop(&s));
 		}
-		if (!strcmp(pro, "size")) {
+		if (!strcmp(ptr, "size")) {
 			printf("%d\n", (s.top + 1));
 		}
-		if (!strcmp(pro, "empty")) {
+		if (!strcmp(ptr, "empty")) {
 			if (s.top == -1) {
 				printf("1\n");
 			}
@@ -72,7 +74,7 @@ int main(void) {
 				printf("0\n");
 			}
 		}
-		if (!strcmp(pro, "top")) {
+		if (!strcmp(ptr, "top")) {
 			if (s.top == -1) {
 				printf("-1\n");
 			}
