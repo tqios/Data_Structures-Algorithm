@@ -1,32 +1,71 @@
-#include <iostream>
-#include <stack>
-using namespace std;
+#include<stdio.h>
+#include<stdlib.h>
 
-int main(void)
-{
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+#define MAX_STACK_SIZE 100
+typedef int element;
+typedef struct {
+	element data[MAX_STACK_SIZE];
+	int top;
+} StackType;
 
-    int K, temp, sum = 0;
-    stack<int> S;
+void init_stack(StackType* s) {
+	s->top = -1;
+}
 
-    cin >> K;
-    for (int i = 0; i < K; i++)
-    {
-        cin >> temp;
-        if (temp == 0)
-            S.pop();
-        else
-            S.push(temp);
-    }
+int is_empty(StackType* s) {
+	return (s->top == -1);
+}
 
-    while (!S.empty())
-    {
-        sum += S.top();
-        S.pop();
-    }
+int is_full(StackType* s) {
+	return (s->top == (MAX_STACK_SIZE - 1));
+}
 
-    cout << sum << endl;
+void push(StackType* s, element item) {
+	if (is_full(s)==(MAX_STACK_SIZE-1)) {
+		fprintf(stderr, "스택 포화 에러\n");
+		return;
+	}
+	else
+		s->data[++(s->top)] = item;
+}
 
-    return 0;
+element pop(StackType* s) {
+	if (is_empty(s)==-1) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->data[(s->top)--];
+}
+
+element peek(StackType* s) {
+	if (is_empty(s)==-1) {
+		fprintf(stderr, "스택 공백 에러\n");
+		exit(1);
+	}
+	else
+		return s->data[s->top];
+}
+
+int main() {
+	StackType s;
+	init_stack(&s);
+	int loop, num;
+	int sum = 0;
+	scanf("%d", &loop);
+
+	for (int i = 0; i < loop; i++) {
+		scanf("%d", &num);
+		if (num == 0) {
+			pop(&s);
+		}
+		else {
+			push(&s, num);
+		}
+	}
+
+	while (s.top != -1) {
+		sum = sum + pop(&s);
+	}
+	printf("%d", sum);
 }
