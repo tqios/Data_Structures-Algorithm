@@ -1,13 +1,12 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-#define MAX_STACK_SIZE 100
-typedef long element;
+#define MAX_STACK_SIZE 100000
+
+typedef int element;
 typedef struct
 {
     element data[MAX_STACK_SIZE];
-    long top;
+    int top;
 } StackType;
 
 void init_stack(StackType *s)
@@ -15,63 +14,48 @@ void init_stack(StackType *s)
     s->top = -1;
 }
 
-int is_empty(StackType *s)
-{
-    return (s->top == -1);
-}
-
-int is_full(StackType *s)
-{
-    return (s->top == (MAX_STACK_SIZE - 1));
-}
-
 void push(StackType *s, element item)
 {
-    if (is_full(s))
-    {
-        fprintf(stderr, "스택 포화 에러\n");
-        return;
-    }
-    else
-        s->data[++(s->top)] = item;
+    s->data[++(s->top)] = item;
 }
 
 element pop(StackType *s)
 {
-    if (is_empty(s))
+    if (s->top == -1)
     {
-        return -1;
+        return 0;
     }
     else
-        return s->data[(s->top--)];
+    {
+        return s->data[(s->top)--];
+    }
 }
 
 int main(void)
 {
     StackType s;
-
     init_stack(&s);
 
-    long k;
-    scanf("%ld", &k);
+    int k;
+    scanf("%d", &k);
 
-    for (long i = 0; i < k; i++)
+    int x;
+    for (int i = 0; i < k; i++)
     {
-        long x;
-        scanf("%ld", &x);
+        scanf("%d", &x);
 
-        if (x != 0)
-        {
-            push(&s, x);
-        }
-        else
+        if (x == 0)
         {
             pop(&s);
         }
+        else
+        {
+            push(&s, x);
+        }
     }
 
-    long sum = 0;
-    for (long i = 0; i <= s.top + 1; i++)
+    int sum = 0;
+    while (s.top != -1)
     {
         sum = sum + pop(&s);
     }
