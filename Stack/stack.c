@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_STACK_SIZE 100
+#define MAX_STACK_SIZE 100000
 typedef int element;
 typedef struct
 {
@@ -15,30 +15,14 @@ void init_stack(StackType *s)
   s->top = -1;
 }
 
-int is_empty(StackType *s)
-{
-  return (s->top == -1);
-}
-
-int is_full(StackType *s)
-{
-  return (s->top == (MAX_STACK_SIZE - 1));
-}
-
 void push(StackType *s, element item)
 {
-  if (is_full(s))
-  {
-    fprintf(stderr, "스택 포화 에러\n");
-    return;
-  }
-  else
-    s->data[++(s->top)] = item;
+  s->data[++(s->top)] = item;
 }
 
 element pop(StackType *s)
 {
-  if (is_empty(s))
+  if (s->top == -1)
   {
     return -1;
   }
@@ -52,23 +36,21 @@ int main(void)
 
   init_stack(&s);
 
-  int n;
+  int n, x;
   scanf("%d", &n);
-  char arr[2];
+  fgetc(stdin);
 
   for (int i = 0; i < n; i++)
   {
     char input[10];
     scanf("%s", &input);
-    char *ptr, *ptr1, *a, *b;
-    ptr = strtok(input, " ");
-    a = ptr;
-    ptr = strtok(NULL, " ");
-    b = ptr;
+    fgetc(stdin);
 
-    if (strcmp("push", a) == 0)
+    if (strcmp("push", input) == 0)
     {
-      push(&s, (int)b);
+      scanf("%d", &x);
+      fgetc(stdin);
+      push(&s, x);
     }
     else if (strcmp("pop", input) == 0)
     {
@@ -97,11 +79,9 @@ int main(void)
       }
       else
       {
-        int top1;
-        top1 = pop(&s);
-        push(&s, top1);
-        printf("%d\n", top1);
+        printf("%d\n", s.data[s.top]);
       }
     }
   }
+  return 0;
 }
