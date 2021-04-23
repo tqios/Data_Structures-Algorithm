@@ -25,20 +25,18 @@ int pop() {
 int main(void) {
 	
 	int loop, num;
-	printf("실행할 횟수를 입력하세요\n");
 	scanf("%d", &loop);
 
 	for (int i = 0; i < loop; i++) {
 		char pro[10];
-		printf("명력을 입력하세요\n");
 		scanf("%s", &pro);
-		
 
-		if (!strcmp(pro,"push")) {
-			printf("저장할 수를 입력하세요");
+		if (!strcmp(pro, "push")) {
 			scanf("%d", &num);
 			push(num);
 		}
+		
+
 		if (!strcmp(pro, "pop")) {
 			printf("%d\n", pop());
 		}
@@ -64,6 +62,7 @@ int main(void) {
 				printf("%d\n", top1);
 			}
 		}
+		
 	}
 
 }
