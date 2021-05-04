@@ -39,7 +39,7 @@ void push(Queuetype *q, int item){
     }
     q->data[++(q->rear)] = item;
 }
-//큐 출력
+//큐 출력.
 int pop(Queuetype *q){
     if(is_empty(q)==1){
         return -1;
