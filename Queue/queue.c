@@ -3,7 +3,7 @@
 #include <string.h>
 #define MAX_QUEUE_SIZE 2000000
 
-typedef struct _queue
+typedef struct
 {
   int front;
   int rear;
@@ -12,7 +12,7 @@ typedef struct _queue
 
 queue *CreateCQueue()
 {
-  queue *q = malloc(sizeof(queue));
+  queue *q = (queue *)malloc(sizeof(queue));
   q->front = -1;
   q->rear = -1;
   return q;
@@ -121,6 +121,7 @@ int main(void)
       printf("\n");
     }
   }
+  DelCQ(q);
 
   return 0;
 }
