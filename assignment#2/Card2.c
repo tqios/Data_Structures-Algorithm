@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_QUEUE_SIZE 500000
+#define MAX_QUEUE_SIZE 1000000
 
 typedef int element;
 typedef struct{
@@ -61,5 +61,6 @@ int main(void){
         num = dequeue(&q);
         enqueue(&q, num);
     }
-    printf("%d",num);
+    printf("%d",dequeue(&q));
+    return 0;
 }
