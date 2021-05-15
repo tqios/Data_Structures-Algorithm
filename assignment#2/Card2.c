@@ -51,16 +51,17 @@ int main(void){
     init_queue(&q);
 
     int N, num;
-    scanf("%d",&N);
+    scanf("%d",&N);//카드의 수를 입력받음
+    //카드의 수만큼 반복함
     for(int i=1; i<=N;i++){
-        enqueue(&q,i);
+        enqueue(&q,i);//카드를 하나씩 큐에 집어넣음
     }
-
+    //카드가 한장 남을때까지 반복
    while(size(&q)!=1){
-        dequeue(&q);
+        dequeue(&q);//하나를 버림
         num = dequeue(&q);
-        enqueue(&q, num);
+        enqueue(&q, num);//하나를 꺼내서 맨뒤에 집어넣음
     }
-    printf("%d",dequeue(&q));
+    printf("%d",dequeue(&q));//마지막 남은 카드를 출력함
     return 0;
 }
