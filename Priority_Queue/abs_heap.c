@@ -94,7 +94,7 @@ int delete_pos_heap(HeapType *h)
     parent = 1;
     child = 2;
     while (child <= h->heap_size)
-    { //현재 노드의 자식 노드 중 더 큰 자식 노드를 찾는다
+    { //현재 노드의 자식 노드 중 더 작은 자식 노드를 찾는다
         if ((child < h->heap_size) && (h->heap[child]) > h->heap[child + 1])
             //같은 레벨의 노드 중 작은 노드와 바꿔야 하므로 작은 노드의 인덱스를 child로 지정한다
             child++;
@@ -109,23 +109,31 @@ int delete_pos_heap(HeapType *h)
     return item;
 }
 
-int delete_heap(HeapType *h_pos, HeapType *h_neg)
+void delete_heap(HeapType *h_pos, HeapType *h_neg)
 {
     //heap이 둘 다 비어있으면 0을 return 한다
     if (h_pos->heap_size == 0 && h_neg->heap_size == 0)
     {
-        return 0;
+        printf("%d\n", 0);
+        return;
     }
+    int del;
     int pos = h_pos->heap[1];      //pos에 h_pos의 루트 노드를 넣는다
     int neg = abs(h_neg->heap[1]); //neg에 h_neg의 루트 노드의 절댓값을 넣는다
     if (pos >= neg || h_pos->heap_size == 0)
     { //h_pos가 비어있거나
         //neg가 pos보다 작거나 같으면 neg에서 루트를 삭제하고 return
-        return delete_neg_heap(h_neg);
+        del = delete_neg_heap(h_neg);
+        printf("%d\n", del);
+        printf("neg\n");
+        return;
     }
-    else
+    else if (pos < neg || h_neg->heap_size == 0)
     { //neg가 pos보다 크면 pos에서 루트를 삭제하고 return
-        return delete_pos_heap(h_pos);
+        del = delete_pos_heap(h_pos);
+        printf("%d\n", del);
+        printf("pos\n");
+        return;
     }
 }
 
@@ -144,8 +152,7 @@ int main(void)
         scanf("%d", &x);
         if (x == 0)
         { //x가 0이면 절댓값이 가장 작은 값을 출력한다
-            del = delete_heap(heap_pos, heap_neg);
-            printf("%d\n", del);
+            delete_heap(heap_pos, heap_neg);
         }
         else if (x > 0)
         { //x가 양수이면 heap_pos에 넣는다

@@ -55,7 +55,7 @@ int delete_min_heap(HeapType *h)
     parent = 1;
     child = 2;
     while (child <= h->heap_size)
-    { //현재 노드의 자식 노드 중 더 큰 자식 노드를 찾는다
+    { //현재 노드의 자식 노드 중 더 작은 자식 노드를 찾는다
         if ((child < h->heap_size) && (h->heap[child]) > h->heap[child + 1])
             //같은 레벨의 노드 중 작은 노드와 바꿔야 하므로 작은 노드의 인덱스를 child로 지정한다
             child++;
