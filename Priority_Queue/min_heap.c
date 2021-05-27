@@ -21,7 +21,7 @@ void init(HeapType *h)
 }
 
 //heap에 삽입하는 함수
-void insert_max_heap(HeapType *h, int item)
+void insert_min_heap(HeapType *h, int item)
 {
     int i;
     i = ++(h->heap_size);
@@ -37,7 +37,7 @@ void insert_max_heap(HeapType *h, int item)
 }
 
 //heap에서 삭제하는 함수
-int delete_max_heap(HeapType *h)
+int delete_min_heap(HeapType *h)
 {
     //heap이 비어있으면 0을 return 한다
     if (h->heap_size == 0)
@@ -83,12 +83,12 @@ int main(void)
         scanf("%d", &x);
         if (x == 0)
         { //x가 0이면 노드를 가장 작은 값을 출력한다
-            del = delete_max_heap(heap);
+            del = delete_min_heap(heap);
             printf("%d\n", del);
         }
         else
         { //x가 0이 아니면 heap에 x를 삽입한다.
-            insert_max_heap(heap, x);
+            insert_min_heap(heap, x);
         }
     }
 
