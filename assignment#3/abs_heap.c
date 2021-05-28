@@ -1,7 +1,7 @@
 //완성 X
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_SIZE 100000
+#define MAX_SIZE 100001
 
 typedef struct
 {
@@ -35,11 +35,6 @@ void insert_neg_heap(HeapType *h, int item)
         //트리를 거슬러 올라가는 과정
     }
     h->heap[i] = item; //새로운 노드를 삽입
-
-    // for(int j= 1; j<(h->heap_size+1); j++){
-    //     printf("%d", h->heap[j]);
-    // }
-    // printf("\n");
 }
 
 //heap에서 삭제하는 함수 - 음수
@@ -68,11 +63,6 @@ int delete_neg_heap(HeapType *h)
     }
     h->heap[parent] = temp;
 
-    printf("array");
-    for(int j= 1; j<(h->heap_size+1); j++){
-        printf("%d", h->heap[j]);
-    }
-    printf("\n------\n");
     return item;
 }
 
@@ -90,10 +80,6 @@ void insert_pos_heap(HeapType *h, int item)
         //트리를 거슬러 올라가는 과정
     }
     h->heap[i] = item; //새로운 노드를 삽입
-    // for(int j= 1; j<(h->heap_size+1); j++){
-    //     printf("%d", h->heap[j]);
-    // }
-    // printf("\n");
 }
 
 //heap에서 삭제하는 함수 - 양수
@@ -121,36 +107,25 @@ int delete_pos_heap(HeapType *h)
         child *= 2;
     }
     h->heap[parent] = temp;
-    printf("array");
-    for(int j= 1; j<(h->heap_size+1); j++){
-        printf("%d", h->heap[j]);
-    }
-    printf("\n------\n");
+
     return item;
 }
 
-int delete_heap(HeapType *h_pos, HeapType *h_neg)
-{
-    //heap이 둘 다 비어있으면 0을 출력 한다
-    if (h_pos->heap_size == 0 && h_neg->heap_size == 0) //값이 비어도 들어가지 않음
-    {
+int delete_heap(HeapType *h_pos, HeapType *h_neg){
+    int pos = h_pos->heap[1];
+    int neg = abs(h_neg->heap[1]);
+    if(h_pos->heap_size==0 && h_neg->heap_size==0){
         printf("0\n");
-        return 0; //리턴값을 넣어 함수를 종료함
+        return 0;
     }
-    int pos = h_pos->heap[1];      //pos에 h_pos의 루트 노드를 넣는다
-    int neg = abs(h_neg->heap[1]); //neg에 h_neg의 루트 노드의 절댓값을 넣는다
-    if (pos >= neg || h_pos->heap_size == 0) //neg가 비어도 계속해서 비교함
-    { //h_pos가 비어있거나
-        //neg가 pos보다 작거나 같으면 neg에서 루트를 삭제하고 return
-        printf("%d\n", delete_neg_heap(h_neg));
-        printf("neg\n");
-    }
-    else if (pos < neg || h_neg->heap_size == 0)
-    { //neg가 pos보다 크면 pos에서 루트를 삭제하고 return
+    if(pos<neg || h_neg->heap_size==0){
         printf("%d\n", delete_pos_heap(h_pos));
-        printf("pos\n");
+        return 0;
     }
-    return 0;
+    else if(neg<=pos || h_pos->heap_size==0){
+        printf("%d\n", delete_neg_heap(h_neg));
+        return 0;
+    } 
 }
 
 int main(void)
