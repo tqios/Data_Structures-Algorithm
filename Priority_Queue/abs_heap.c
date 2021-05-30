@@ -1,4 +1,3 @@
-//완성 X
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX_SIZE 100000
@@ -120,23 +119,22 @@ void delete_heap(HeapType *h_pos, HeapType *h_neg)
     int del;
     int pos = h_pos->heap[1];      //pos에 h_pos의 루트 노드를 넣는다
     int neg = abs(h_neg->heap[1]); //neg에 h_neg의 루트 노드의 절댓값을 넣는다
-    if (pos >= neg || h_pos->heap_size == 0)
+    if (pos < neg || h_neg->heap_size == 0)
+    { //h_neg가 비어있거나
+        //neg가 pos보다 크면 pos에서 루트를 삭제하고 return
+        del = delete_pos_heap(h_pos);
+        printf("%d\n", del);
+        return;
+    } //
+    else if (pos >= neg || h_pos->heap_size == 0)
     { //h_pos가 비어있거나
         //neg가 pos보다 작거나 같으면 neg에서 루트를 삭제하고 return
         del = delete_neg_heap(h_neg);
         printf("%d\n", del);
-        printf("neg\n");
-        return;
-    }
-    else if (pos < neg || h_neg->heap_size == 0)
-    { //neg가 pos보다 크면 pos에서 루트를 삭제하고 return
-        del = delete_pos_heap(h_pos);
-        printf("%d\n", del);
-        printf("pos\n");
         return;
     }
 }
-
+//-50%에서 실패
 int main(void)
 {
     HeapType *heap_pos, *heap_neg;
