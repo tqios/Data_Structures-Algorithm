@@ -27,28 +27,28 @@ int find(int list[], int data) {
     return -1;
 }
 //중위순회, 후위순회를 이용하여 Tree를 만드는 함수
-int maketree(TreeNode* node, int pend, int instart, int inend, int in[], int post[],int index) {
+TreeNode *maketree(TreeNode* node, int *pend, int instart, int inend, int in[], int post[],int index) {
     // 가운데 찾음
     // 루트에 저장
     if (instart <= inend && index!=-1) {
-        int top = post[pend--];//post의 맨 뒤값이 루트의 부모노드
+        int top = post[(*pend)--];//post의 맨 뒤값이 루트의 부모노드
         node = NewNode(top);
         int index = find(in, top);
-        //printf("||index:%d top:%d pe:%d is:%d ie:%d||\n\n",index,top,pend+1, instart, inend);
+        //printf("||index:%d top:%d pe:%d is:%d ie:%d||\n\n",index,top,*pend+1, instart, inend);
         
         //check = 'r';
-        pend = maketree(node->right, pend, index + 1, inend, in, post,index);//오른쪽 반복
+        node->right = maketree(node->right, pend, index + 1, inend, in, post,index);//오른쪽 반복
         //check = 'l';
-        pend = maketree(node->left, pend, instart, index - 1, in, post,index);//왼쪽 반복
+        node->left = maketree(node->left, pend, instart, index - 1, in, post,index);//왼쪽 반복
     }
-    return pend;
+    return node;
 }
 
 
 //전위순회 함수
 void preorder(TreeNode* root) {
     if (root != NULL) {
-        printf("%d", root->data);
+        printf("%d ", root->data);
         preorder(root->left);
         preorder(root->right);
     }
@@ -70,7 +70,9 @@ int main(void) {
     
     TreeNode* root = NULL;
     int index =0;
-    maketree(root, loop - 1, 0, loop - 1, in, post,index); //node 값이 반환되지 않음
-    preorder(root->left);
+    int num = loop-1;
+    int *pend = &num;
+    root = maketree(root, pend, 0, loop - 1, in, post,index); //node 값이 반환되지 않음
+    preorder(root);
     return 0;
 }
