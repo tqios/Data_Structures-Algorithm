@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Node를 구성하는 구조체 정의
 typedef struct TreeNode {
     int data;
     struct TreeNode* left;
@@ -19,8 +20,8 @@ TreeNode* NewNode(int data) {
 
 //배열의 특정값 인덱스를 찾는 함수
 int find(int list[], int data) {
-    for (int i = 0; i < 100001; i++) {
-        if (list[i] == data) {
+    for (int i = 0; i < 100001; i++) {//배열의 크기만큼 반복
+        if (list[i] == data) {//data값과 일치하면 인덱스 반환
             return i;
         }
     }
@@ -32,13 +33,10 @@ TreeNode *maketree(TreeNode* node, int *pend, int instart, int inend, int in[], 
     // 루트에 저장
     if (instart <= inend && index!=-1) {
         int top = post[(*pend)--];//post의 맨 뒤값이 루트의 부모노드
-        node = NewNode(top);
-        int index = find(in, top);
-        //printf("||index:%d top:%d pe:%d is:%d ie:%d||\n\n",index,top,*pend+1, instart, inend);
+        node = NewNode(top); //top값을 넣은 노드를 만듦
+        int index = find(in, top);//in배열에서 top의 인덱스를 찾음
         
-        //check = 'r';
         node->right = maketree(node->right, pend, index + 1, inend, in, post,index);//오른쪽 반복
-        //check = 'l';
         node->left = maketree(node->left, pend, instart, index - 1, in, post,index);//왼쪽 반복
     }
     return node;
@@ -70,9 +68,8 @@ int main(void) {
     
     TreeNode* root = NULL;
     int index =0;
-    int num = loop-1;
-    int *pend = &num;
-    root = maketree(root, pend, 0, loop - 1, in, post,index); //node 값이 반환되지 않음
+    int pend = loop-1;
+    root = maketree(root, &pend, 0, loop - 1, in, post,index); //트리를 만듦
     preorder(root);
     return 0;
 }
